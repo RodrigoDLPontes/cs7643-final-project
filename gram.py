@@ -39,7 +39,6 @@ class GRAM_RTM(Dataset):
             masked_img = self.transform(masked_img)
 
         num_cars = self.labels.iloc[idx, 0]
-        num_cars = np.array([num_cars])
         sample = {'image': masked_img, 'num_cars': num_cars}
 
         return sample
