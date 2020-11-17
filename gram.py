@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
 from skimage import io
+from torch.utils.data import Dataset
 
 class GRAM_RTM(Dataset):
     """GRAM Road-Traffic Monitoring (GRAM-RTM) dataset."""
 
-    def __init__(self, csv_path="num_cars.csv", img_path="M-30", roi_path="ROI.jpg"):
+    def __init__(self, csv_path="num_cars_corrected.csv", img_path="M-30", roi_path="ROI.jpg"):
         """
         Args:
             csv_file (string): Path to the csv file with labels.
