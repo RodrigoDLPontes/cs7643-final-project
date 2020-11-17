@@ -1,5 +1,6 @@
 import os
 import torch
+import numpy as np
 import pandas as pd
 from skimage import io
 from torch.utils.data import Dataset
@@ -21,6 +22,7 @@ class GRAM_RTM(Dataset):
         self.img_path = img_path
         roi = io.imread(roi_path)
         self.roi = roi // 255
+        self.transform = transform
 
     def __len__(self):
         return len(self.labels)
@@ -37,7 +39,7 @@ class GRAM_RTM(Dataset):
             masked_img = self.transform(masked_img)
 
         num_cars = self.labels.iloc[idx, 0]
-        num_cars = torch.tensor([num_cars])
+        num_cars = np.array([num_cars])
         sample = {'image': masked_img, 'num_cars': num_cars}
 
         return sample
