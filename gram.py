@@ -1,6 +1,5 @@
 import os
 import torch
-import numpy as np
 import pandas as pd
 from skimage import io
 from torch.utils.data import Dataset
@@ -8,7 +7,8 @@ from torch.utils.data import Dataset
 class GRAM_RTM(Dataset):
     """GRAM Road-Traffic Monitoring (GRAM-RTM) dataset."""
 
-    def __init__(self, csv_path="num_cars_corrected.csv", img_path="M-30", roi_path="ROI.jpg", prefix=""):
+    def __init__(self, csv_path="num_cars_corrected.csv", img_path="M-30",
+                roi_path="ROI.jpg", prefix="", transform=None):
         """
         Args:
             csv_path (string): Path to the csv file with labels.
@@ -18,9 +18,11 @@ class GRAM_RTM(Dataset):
         """
         csv_path, img_path, roi_path = map(lambda p: os.path.join(prefix, p), (csv_path, img_path, roi_path))
         self.labels = pd.read_csv(csv_path)
+        self.num_labels = max(self.labels['num_cars']) - min(self.labels['num_cars']) + 1
         self.img_path = img_path
         roi = io.imread(roi_path)
         self.roi = roi // 255
+        self.transform = transform
 
     def __len__(self):
         return len(self.labels)
@@ -33,8 +35,12 @@ class GRAM_RTM(Dataset):
         file_path = os.path.join(self.img_path, file_name)
         image = io.imread(file_path)
         masked_img = image * self.roi
-        num_cars = self.labels.iloc[idx, 0]
-        num_cars = np.array([num_cars])
-        sample = {'image': masked_img, 'num_cars': num_cars}
+        if self.transform:
+            masked_img = self.transform(masked_img)
 
+        num_cars = self.labels.iloc[idx, 0]
+        gt_output = torch.zeros(self.num_labels)
+        gt_output[num_cars] = 1
+
+        sample = {'image': masked_img, 'gt_output': gt_output}
         return sample
