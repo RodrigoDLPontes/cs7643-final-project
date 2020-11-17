@@ -1,0 +1,34 @@
+import numpy as np
+import pandas as pd
+from skimage import io
+
+class GRAM_RTM(Dataset):
+    """GRAM Road-Traffic Monitoring (GRAM-RTM) dataset."""
+
+    def __init__(self, csv_path="num_cars.csv", img_path="M-30", roi_path="ROI.jpg"):
+        """
+        Args:
+            csv_file (string): Path to the csv file with labels.
+            root_dir (string): Directory with all the M-30 frames.
+        """
+        self.labels = pd.read_csv(csv_path)
+        self.img_path = img_path
+        roi = io.imread(roi_path)
+        self.roi = roi // 255
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.item()
+
+        file_name = f"image{idx + 1:06}.jpg"
+        file_path = os.path.join(self.img_path, file_name)
+        image = io.imread(file_path)
+        masked_img = image * self.roi
+        num_cars = self.labels.iloc[idx, 0]
+        num_cars = np.array([num_cars])
+        sample = {'image': masked_img, 'num_cars': num_cars}
+
+        return sample
