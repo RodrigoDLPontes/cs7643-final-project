@@ -11,8 +11,10 @@ class GRAM_RTM(Dataset):
     def __init__(self, csv_path="num_cars_corrected.csv", img_path="M-30", roi_path="ROI.jpg", prefix=""):
         """
         Args:
-            csv_file (string): Path to the csv file with labels.
-            root_dir (string): Directory with all the M-30 frames.
+            csv_path (string): Path to the csv file with labels.
+            root_path (string): Path to folder with all the M-30 frames.
+            roi_path (string): Path to ROI mask.
+            prefix (string): Prefix to be added to all paths.
         """
         csv_path, img_path, roi_path = map(lambda p: os.path.join(prefix, p), (csv_path, img_path, roi_path))
         self.labels = pd.read_csv(csv_path)
