@@ -18,11 +18,9 @@ class GRAM_RTM(Dataset):
         """
         csv_path, img_path, roi_path = map(lambda p: os.path.join(prefix, p), (csv_path, img_path, roi_path))
         self.labels = pd.read_csv(csv_path)
-        self.num_labels = max(self.labels['num_cars']) - min(self.labels['num_cars']) + 1
         self.img_path = img_path
         roi = io.imread(roi_path)
         self.roi = roi // 255
-        self.transform = transform
 
     def __len__(self):
         return len(self.labels)
@@ -39,8 +37,7 @@ class GRAM_RTM(Dataset):
             masked_img = self.transform(masked_img)
 
         num_cars = self.labels.iloc[idx, 0]
-        gt_output = torch.zeros(self.num_labels)
-        gt_output[num_cars] = 1
+        num_cars = torch.tensor([num_cars])
+        sample = {'image': masked_img, 'num_cars': num_cars}
 
-        sample = {'image': masked_img, 'gt_output': gt_output}
         return sample
