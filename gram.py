@@ -62,11 +62,11 @@ class GRAM_RTM(Dataset):
         file_name = f"image{idx + 1:06}.jpg"
         file_path = os.path.join(self.img_path, file_name)
         image = io.imread(file_path)
-        mean = [0.485, 0.456, 0.406]
-        std = [0.229, 0.224, 0.225]
         if self.detectron:
             image = image * self.roi
         else:
+            mean = [0.485, 0.456, 0.406]
+            std = [0.229, 0.224, 0.225]
             image = transforms.Compose([
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std)
