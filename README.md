@@ -8,7 +8,7 @@ Below are descriptions for each file.
 
 ## Notebooks
 
-All notebooks can be found in the ```notebooks/``` folder. Some notebooks will require the download of the dataset [here](https://drive.google.com/file/d/1u-9SPy_biQIVaETdmGaLIopIG7T3dsrW/view?usp=sharing).
+All notebooks can be found in the ```notebooks/``` folder. Some notebooks will require the download of the dataset [here](https://drive.google.com/file/d/1u-9SPy_biQIVaETdmGaLIopIG7T3dsrW/view?usp=sharing). Due to its size, the ```GRAM``` notebook could not be uploaded to GitHub but can be found [here](https://drive.google.com/file/d/1SYGTuR9f4cBac1W5w20RFZnw6DeAD6L-/view?usp=sharing).
 
 - **Detectron:** contains preliminary experimentation with Detectron2
 - **GRAM**: analysis of the M-30 video sequence from the GRAM-RTM, used for the conversion of the provided bounding box annotations in XML to labels for each frame (count of cars) and manual inspection of correctness of the labels. *Warning: around 500MB in size, may take a while to load.*
