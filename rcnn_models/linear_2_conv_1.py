@@ -12,14 +12,14 @@ class BackboneTail(nn.Module):
         
     def forward(self, act_maps):
         '''
-        Run mini-batch of images through model.
+        Run mini-batch of activation maps through model.
 
         Args:
-            images (Tensor): A tensor of size (N, C, H, W) where
+            act_maps (Tensor): A tensor of size (N, C, H, W) where
                 N is the batch size
                 C is the number of channels
-                H is the image height
-                W is the image width
+                H is the activation map height
+                W is the activation map width
 
         Returns:
             A Tensor of size (N, num_labels) specifying the score

@@ -17,6 +17,11 @@ class GRAM_RTM(Dataset):
             root_path (string): Path to folder with all the M-30 frames.
             roi_path (string): Path to ROI mask.
             prefix (string): Prefix to be added to all paths.
+            split (string): Split to be used, one of "train", "val" or "test". If None, uses all frames.
+            spec_nn (Boolean): whether dataset will be used for specialized NN (outputs 65x65 frames).
+                               If False, should be used with backbone (outputs frames with shorter side of 224).
+            detectron (Boolean): whether dataset will be used with Detectron2 predictors (i.e. rcnn.py).
+                                 If True, ignores spec_nn.
         """
         csv_path, img_path, roi_path = map(lambda p: os.path.join(prefix, p), (csv_path, img_path, roi_path))
 

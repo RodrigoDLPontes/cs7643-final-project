@@ -4,16 +4,16 @@ import pandas as pd
 from torch.utils.data import Dataset
 
 class ActivationMaps(Dataset):
-    """GRAM Road-Traffic Monitoring (GRAM-RTM) dataset."""
+    """Feature/activation maps dataset, which need to be generated in the Maps.ipynb notebook."""
 
     def __init__(self, csv_path="num_cars_corrected.csv",
                  act_map_path="maps", prefix="", split=None):
         """
         Args:
             csv_path (string): Path to the csv file with labels.
-            root_path (string): Path to folder with all the M-30 frames.
-            roi_path (string): Path to ROI mask.
+            act_map_path (string): Path to folder with feature maps.
             prefix (string): Prefix to be added to all paths.
+            split (string): Split to be used, one of "train", "val" or "test". If None, uses all frames.
         """
         csv_path, act_map_path = map(lambda p: os.path.join(prefix, p), (csv_path, act_map_path))
 

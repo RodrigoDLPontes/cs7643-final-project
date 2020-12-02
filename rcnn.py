@@ -4,6 +4,7 @@ from detectron2 import model_zoo as zoo
 from detectron2.engine import DefaultPredictor
 
 class RCNN():
+    """Detectron2 predictor adapted to output counts of car bounding boxes in forward pass."""
 
     def __init__(self, rcnn_type="M50"):
         types = {
