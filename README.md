@@ -15,6 +15,7 @@ All notebooks can be found in the ```notebooks/``` folder, except for the ```GRA
 - **Data Analysis**: analysis of distribution of labels among train, validation and test sets.
 - **RCNN**: preliminary tests on adapting RCNN models to count objects
 - **Maps**: used to generate and store feature maps from backbones to be used with models under ```rcnn_models/``` for the comparison notebooks
+- **Specialized NNs**: preliminary tests on using the specialized NN from [BlazeIt](https://github.com/stanford-futuredata/blazeit). *Note: this notebook was created to be used with [Google Colab](colab.research.google.com).*
 - **Comparisons**: contains tests for performance (subsection 4.1 in the PDF) and usage of different backbones (subsection 4.2 in PDF)
 - **Comparisons2**: contains tests for performance comparison while using Adam optimizer for specialized NN, and correlations (subsection 4.3 in PDF)
 - **Comparisons3**: contains tests for comparing performance with  RCNN models (subsection 4.4 in PDF)
